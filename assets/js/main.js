@@ -20,13 +20,12 @@ class Carrito {
         return total  
     }
 }
-//REGISTRAR VARIABLES
 
+//REGISTRAR VARIABLES
 let registroNombre
 let registroId
 let registroPrecio
 let registrarTotal
-
 let contenedorNombre
 let contenedorId
 let contenedorPrecio
@@ -41,12 +40,6 @@ function registrarHtml (){
 }
 registrarHtml()
 
-function registrarProductos (){  
-    registroNombre.innerHTML += `<li>${contenedorNombre}</li>`;
-    registroId.innerHTML += `<li>${contenedorId}</li>`
-    registroPrecio.innerHTML += `<li>$ ${contenedorPrecio}</li>`
-}
-
 function recorridoArray () {
     for (const producto of carrito.productos){
         contenedorNombre = producto.nombre 
@@ -55,9 +48,12 @@ function recorridoArray () {
     }   
 }
 
-function mostrarTotal (){  
+function registrarProductos (){  
+    registroNombre.innerHTML += `<li>${contenedorNombre}</li>`;
+    registroId.innerHTML += `<li>${contenedorId}</li>`
+    registroPrecio.innerHTML += `<li>$ ${contenedorPrecio}</li>`
     registrarTotal.innerHTML = `<li>$ ${carrito.calcularTotal()}</li>`
-} 
+}
 
 function tarjetaDom (producto){
     let tarjetaDom =
@@ -101,13 +97,10 @@ listaProductos.push (producto10);
 listaProductos.push (producto11);
 listaProductos.push (producto12);
 
-
-
 let tarjetaContenedora = document.querySelector("#cards");
 listaProductos.forEach (producto => {
     tarjetaContenedora.innerHTML += tarjetaDom(producto)
 })
-
 
 // Generacion del carrito
 let carrito = new Carrito (1)
@@ -117,9 +110,10 @@ arrayBotones.forEach (boton => {
     boton.addEventListener("click", (e) => {
         let productoSeleccionado = listaProductos.find (producto => producto.id == e.target.id);
         carrito.productos.push(productoSeleccionado);
+        console.log(carrito)
         recorridoArray()
         registrarProductos()
-        mostrarTotal()
+        
     })
 })
 
